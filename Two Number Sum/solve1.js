@@ -15,6 +15,7 @@ function withDoubleForLoop(array, targetSum) {
     return [];
 }
 
+// Time = O(N) | Space = O(N)
 function withHashMap(array, targetSum) {
     let numberHash = {}
     for (let num of array) {
@@ -26,4 +27,28 @@ function withHashMap(array, targetSum) {
     }
 
     return [];
+}
+
+// Time = O(nlogn) | Space = O(1)
+function withTwoPointer(array, targetSum) {
+    const sortedArray = array.sort(function(a, b) {
+        return a - b;
+    });
+    let left = 0;
+    let right = sortedArray.length - 1;
+    while (left < right) {
+        let currentSum = sortedArray[left] + sortedArray[right];
+        if(currentSum === targetSum) {
+            return [left, right];
+        } else if(currentSum < targetSum) {
+            left += 1;
+        } else  if(currentSum > targetSum) {
+            right -= 1;
+        }
+
+    }
+
+    return [];
+
+
 }
